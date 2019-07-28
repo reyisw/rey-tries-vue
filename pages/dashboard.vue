@@ -6,9 +6,6 @@
       </div>
       <v-card>
         <v-card-title class="headline">Welcome, {{ name }}</v-card-title>
-        <v-card-text>
-          <v-btn @click="logOut">Log out</v-btn>
-        </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
@@ -53,29 +50,6 @@ export default {
         })
         .catch(err => {
           throw new Error(err);
-        });
-    },
-    /**
-     * [logOut cerrar sesion]
-     * @return {[type]} [none]
-     */
-    logOut() {
-      const token = sessionStorage.getItem("token");
-      const URL = `https://hidden-depths-47488.herokuapp.com/api/logout?token=${token}`;
-
-      this.$axios({
-        method: "get",
-        url: URL,
-        headers: {
-          Accept: "application/json"
-        }
-      })
-        .then(_ => {
-          sessionStorage.removeItem("token");
-          this.$router.push("/login");
-        })
-        .catch(err => {
-          console.log(err);
         });
     }
   }
